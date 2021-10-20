@@ -20,3 +20,7 @@
 
 file(GLOB SOURCES "*.cc")
 add_library(srsepc_hss STATIC ${SOURCES})
+
+if (MYSQL_FOUND AND ENABLE_MYSQL)
+  target_link_libraries(srsepc_hss ${MYSQL_LIBRARIES})
+endif (MYSQL_FOUND AND ENABLE_MYSQL)

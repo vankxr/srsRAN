@@ -68,6 +68,7 @@ option(ENABLE_SRSEPC         "Build srsEPC application"                 ON)
 option(DISABLE_SIMD          "Disable SIMD instructions"                OFF)
 option(AUTO_DETECT_ISA       "Autodetect supported ISA extensions"      ON)
 
+option(ENABLE_MYSQL          "Enable MySQL User database"               ON)
 option(ENABLE_GUI            "Enable GUI (using srsGUI)"                ON)
 option(ENABLE_RF_PLUGINS     "Enable RF plugins"                        ON)
 option(ENABLE_UHD            "Enable UHD"                               ON)
@@ -203,6 +204,15 @@ else(POLARSSL_FOUND)
     message(FATAL_ERROR "Either PolarSSL or mbedTLS are required to build srsRAN")
   endif (MBEDTLS_FOUND)
 endif(POLARSSL_FOUND)
+
+# MySQL
+if(ENABLE_MYSQL)
+  find_package(MySQL)
+  if(MYSQL_FOUND)
+    include_directories(${MYSQL_INCLUDE_DIRS})
+    link_directories(${MYSQL_LIBRARY_DIRS})
+  endif(MYSQL_FOUND)
+endif(ENABLE_MYSQL)
 
 # Hard-SIM support
 if(ENABLE_HARDSIM)

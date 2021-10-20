@@ -21,6 +21,7 @@
 #include "srsepc/hdr/hss/hss.h"
 #include "srsran/common/security.h"
 #include "srsran/common/string_helpers.h"
+#include <mysql.h>
 #include <arpa/inet.h>
 #include <inttypes.h> // for printing uint64_t
 #include <iomanip>
@@ -36,6 +37,7 @@ pthread_mutex_t hss_instance_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 hss::hss()
 {
+    printf("MySQL client version: %s\n", mysql_get_client_info());
   return;
 }
 
